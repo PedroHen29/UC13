@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "rootDir": "Aula03/src",
+    "outDir": "./dist",
+    "module": "nodenext",
+    "target": "esnext",
+    "strict": true,    
+    "skipLibCheck": true,
+  },
+  "include": ["Aula03/src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

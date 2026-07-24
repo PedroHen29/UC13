@@ -73,7 +73,7 @@ app.delete('/comentarios/:id', (req: Request, res : Response): Response => {
     if (!id) return res.status(400).json({ mensagem: 'ID não enviado' });
     return res.status(200).send({mensagem: "Comentario deletado com sucesso!"}); 
 })
-
+  
 const hora = (req: Request, res : Response): Response => {
     const data = new Date();
     console.log(`Requisição feita em ${data}`)
