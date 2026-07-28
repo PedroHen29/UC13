@@ -9,7 +9,13 @@ export class UserController{
             return res.status(400).json({message: 'name, email, age and password are necessary!'})
         }
 
-        const id = users.length === 0 ? 1 : Math.max(users[users.length].id) + 1
+        for(let i =0; i < users.length; i++){
+            if(email === users[i].email){
+                return res.status(409).json({message: 'This email already exists'})
+            }
+        }
+
+        const id = users.length === 0 ? 1 : users.length +1
         const newUser:User = new User(id, name, email, age, password)
         users.push(newUser)
         return res.status(201).json({message: 'User create with success'})
@@ -46,19 +52,23 @@ export class UserController{
         })
     }
 
-    deleteUser(req:Request, res:Response){
-        const id = Number(req.params.id)
+    deleteUser(req: Request, res: Response) {
+        const id = Number(req.params.id);
         
-        if(!id){
-            return res.status(400).json({message: 'Id are necessary!'})
+        if (!id) {
+          return res.status(400).json({ message: 'O ID é obrigatório!' });
         }
-
-        const user = users.find((user) =>  user.id === id)
-
-        if(!user){
-            return res.status(404).json({message: 'User not found'})
-        }
-
         
-    }
+        const userIndex = users.findIndex((u) => u.id === id);
+        
+        if (userIndex === -1) {
+          return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+        
+        users.splice(userIndex, 1);
+        
+        
+        return res.status(204).send();
+      }
+      
 }
