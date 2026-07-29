@@ -9,6 +9,12 @@ export class ProdutoController{
             return res.status(400).json({message: 'nome, preco, quantidade são obrigatorios'})
         }
 
+        if(preco < 0){
+            return res.status(404).json({message: 'Preço não pode ser negativo'})
+        }
+        if(quantidade < 0){
+            return res.status(404).json({message: 'Quantidade não pode ser nagativa'})
+        }
         const id = produtos.length === 0 ? 1 : produtos.length +1
         const novoProduto = new Produto(id, nome, preco, quantidade)
 
@@ -30,7 +36,7 @@ export class ProdutoController{
 
         const produto = produtos.find((produto) => produto.id === id)
 
-        if(!preco){
+        if(!produto){
             return res.status(404).json({message: 'Produto não encontrado'})
         }
 

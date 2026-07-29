@@ -25,6 +25,10 @@ export class UserController{
         return res.status(200).json(users)
     }
 
+    getNumberUser(req:Request, res:Response){
+        return res.status(200).json(users.length)
+    }
+
     updateUser(req:Request, res:Response){
         const {name, email, age, password} = req.body
         const id = Number(req.params.id)
